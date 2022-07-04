@@ -1,25 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 import "./sidebar.css";
-import axios from "axios";
 import sidebarImage from './Wallmax-14598.jpg'
 import { Context } from "../../context/Context";
 
 export default function Sidebar() {
-  const [cats,setCats] = useState([]);
+  
   const {user} = useContext(Context)
   // console.log(user)
-  useEffect(() => {
-    const getCats = async() =>{
-      const res = await axios.get('/categories')
-      const data = Array.from(res.data);
-      if(res.status===200)
-      setCats(data)
-      
-    }
-    getCats()
-   
-  }, [])
+  
   
   return (
     <div className="sidebar">
@@ -35,19 +23,7 @@ export default function Sidebar() {
           amet ex esse.Sunt eu ut nostrud id quis proident.
         </p>
       </div>
-      <div className="sidebarItem">
-        <span className="sidebarTitle">CATEGORIES</span>
-        <ul className="sidebarList">
-          {cats?cats.map(({c,id})=>{
-            return (
-            <li className="sidebarListItem" key={id}>
-            <Link className="link" to={`/posts?cat=${c.name}`}>
-              {c.name}
-            </Link>
-          </li>
-          )}) : null}  
-        </ul>
-      </div>
+      
       <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">
