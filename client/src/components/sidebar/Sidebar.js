@@ -6,13 +6,15 @@ import sidebarImage from './Wallmax-14598.jpg'
 import { Context } from "../../context/Context";
 
 export default function Sidebar() {
-  const [cats,setCats] = useState([])
+  const [cats,setCats] = useState([]);
   const {user} = useContext(Context)
   // console.log(user)
   useEffect(() => {
     const getCats = async() =>{
       const res = await axios.get('/categories')
+      if(res.status===200)
       setCats(res.data)
+      
     }
     getCats()
    
@@ -34,7 +36,7 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          {cats?cats.map((c,id)=>{
+          {cats?cats.map(({c,id})=>{
             return (
             <li className="sidebarListItem" key={id}>
             <Link className="link" to={`/posts?cat=${c.name}`}>
