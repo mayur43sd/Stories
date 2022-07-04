@@ -34,14 +34,14 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          {cats.map((c,id)=>{
+          {cats?cats.map((c,id)=>{
             return (
             <li className="sidebarListItem" key={id}>
             <Link className="link" to={`/posts?cat=${c.name}`}>
               {c.name}
             </Link>
           </li>
-          )})}  
+          )}) : null}  
         </ul>
       </div>
       <div className="sidebarItem">
